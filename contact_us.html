@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title></title>
+		<link rel="stylesheet" href='resources/main.css'>
+		<style>
+			.field_label {
+				display: inline-block;
+				font-weight: bold;
+				text-align: right;
+				margin-right: 10px;
+				width: 250px;
+			}
+			
+			#form_contact > section, #form_contact > fieldset {
+				margin: 10px 0;
+			}
+			
+			main {
+				width: 600px;
+				margin: auto;
+			}
+			
+			legend {
+				font-weight: bold;
+				float: left;
+				width: 250px;
+				text-align: right;
+			}
+			
+			fieldset {
+				border: none;
+				margin: auto;
+			}
+			
+			fieldset > div {
+				display: inline;
+			}
+			
+			fieldset > div > input {
+				margin-left: 10px;
+			}
+			
+			fieldset > div > label {
+				padding-left: 4px;
+			}
+			
+			
+			#form_contact > section > input[type='text'], #extrainfo, #reason {
+				width: 300px;
+				border: 1px solid black;
+			}
+			
+			#reason {
+				box-sizing: content-box; 
+			}
+			
+			#extrainfo {
+				resize: vertical;
+				vertical-align: top;
+			}
+			
+			#form-controls {
+				text-align: center;
+				padding-top: 15px;
+			}
+		</style>
+	</head>
+	<body style='margin: 0;'>
+		<header id='main-title'>McRonalds</header>
+		<nav id='main-nav'>
+			<a href='index.html'>Home</a>
+			<a href='menu.html'>Menu</a>
+			<a href='contact_us.html'>Contact Us</a>
+		</nav>
+		<main class='center'>
+			<form id='form_contact' method='POST'>
+				<section>
+					<label class='field_label' for='name'>Name:</label>
+					<input id='name' type='text' required>
+				</section>
+				<section>
+					<label class='field_label' for='email'>Email:</label>
+					<input id='email' type='text' required>
+				</section>
+				<section>
+					<label class='field_label' for='phone'>Phone:</label>
+					<input id='phone' type='text' required>
+				</section>
+				<section>
+					<label class='field_label' for='reason'>Reason for Inquiry:</label>
+					<select id='reason'>
+						<option>Catering</option>
+						<option>Private Party</option>
+						<option>Feedback</option>
+						<option>Other</option>
+					</select>
+				</section>
+				<section>
+					<label class='field_label' for='extrainfo'>Additional Information:</label>
+					<textarea id='extrainfo'></textarea>
+				</section>
+				
+				<fieldset>
+					<legend>Have you been to the restaurant?</legend>
+					<div>
+						<input type='radio' name='has_visited' id='visited_no' required><label for='visited_no'>No</label>
+						<input type='radio' name='has_visited' id='visited_yes' required><label for='visited_yes'>Yes</label>
+					</div>
+				</fieldset>
+				
+				<fieldset>
+					<legend>Best days to contact you:</legend>
+					<div>
+						<input type='checkbox' id='contact_monday'><label for='contact_monday'>M</label>
+						<input type='checkbox' id='contact_tuesday'><label for='contact_tuesday'>T</label>
+						<input type='checkbox' id='contact_wednesday'><label for='contact_wednesday'>W</label>
+						<input type='checkbox' id='contact_thursday'><label for='contact_thursday'>Th</label>
+						<input type='checkbox' id='contact_friday'><label for='contact_friday'>F</label>
+					</div>
+				</fieldset>
+				
+				<section id='form-controls'>
+					<input type='submit' value='Send Request'>
+				</section>
+			</form>
+		</main>
+		<footer id='main-footer'>
+			 19820 Alberta St, Oneida, TN 37841<br>
+			 (423) 286-7800
+		</footer>
+	</body>
+</html>
