@@ -1,128 +1,214 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html lang='en'>
 	<head>
-		<title></title>
-		<link rel="stylesheet" href='resources/main.css'>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+		<title>Contact Us</title>
+		<!-- Bootstrap !-->
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
+		<!-- Site CSS !-->
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'> 
+		<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous'>
+		<link rel='stylesheet' href='resources/main.css'>
+		
+		<script>
+			<!-- Stolen email validation regex that's based on HTML5's email validation spec -->
+			var emailValidator = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$/;
+			var phoneValidator = /^1?\d{10}$/; <!-- We want to match domestic (123) 456-7890 and international formatted US numbers: +1 (123) 456-7890 -->
+			var phoneReplacer = /[ ()+-]/g; <!-- Strips away characters from a user-friendly phone number producing only a numeric string. -->
+			
+			var isFormValid = true;
+			
+            $(function() {
+                $("#contact-form").submit(function() {
+					isFormValid = true;
+					setFormGroupHasError("#name-group", $("#name").val().length === 0 || $("#name").val().length > 40);
+					setFormGroupHasError("#email-group", !emailValidator.test($("#email").val()));
+					setFormGroupHasError("#phone-group", !phoneValidator.test($("#phone").val().replace(phoneReplacer, "")));
+					setFormGroupHasError("#has-visited-group", $("[name='has_visited']:checked").length !== 1);
+					setFormGroupHasError("#additional-info-group", $("#additional_info").length > 1000);
+					setFormGroupHasError("#contact-days-group", $("[name='contact_days[]']:checked").length === 0);
+					
+					// If there was bad input on submission, find the first errored group and scroll to it.
+					if (!isFormValid) {
+						$("html, body").animate({ scrollTop: $(".has-error").offset().top - 10 }, 500);
+					}
+					else {
+						alert("The contact form has been submitted!");
+					}
+					
+                    return isFormValid;
+                });
+				
+				$("input[name='phone']").on("change", function() {
+					var phoneNumber = $(this).val().replace(phoneReplacer, ""); // Strip out any phone number formatting characters the browser may autofill.
+					console.log(phoneNumber);
+					// If the phone number passes validation, make it look good in the text field and disable the browser's built-in validation so the form is allowed to submit.
+					if (phoneValidator.test(phoneNumber)) {
+						$(this).removeAttr("pattern");
+						
+						if (phoneNumber.length === 11) {
+							phoneNumber = phoneNumber.substring(1);
+						}
+						
+						$(this).val("+1 (" + phoneNumber.substring(0, 3) + ") " + phoneNumber.substring(3, 6) + "-" + phoneNumber.substring(6, 10));
+					}
+					else {  // Else, tell browser to deal with validation.
+						$(this).attr("pattern", phoneValidator.source);
+					}
+				});
+            });
+			
+			/*
+				If hasError is TRUE, the form group given will turn red and the global variable isFormValid will be set to false to prevent form submission.
+			*/
+			function setFormGroupHasError(element, hasError) {
+				if (hasError === true) {
+					$(element).addClass("has-error");
+					isFormValid = false;
+				}
+				else {
+					$(element).removeClass("has-error");
+				}
+			}
+		</script>
+		
 		<style>
-			.field_label {
-				display: inline-block;
-				font-weight: bold;
-				text-align: right;
-				margin-right: 10px;
-				width: 250px;
+			.help-block {
+				display: none;
 			}
 			
-			#form_contact > section, #form_contact > fieldset {
-				margin: 10px 0;
+			.has-error .help-block {
+				display: block;
 			}
 			
-			main {
-				width: 600px;
-				margin: auto;
+			.has-error .text-muted {
+				display: none;
+			}
+		
+			#contact-form {
+				max-width: 750px;
+				margin: 0 auto;
+				padding: 15px;
 			}
 			
-			legend {
-				font-weight: bold;
-				float: left;
-				width: 250px;
-				text-align: right;
-			}
-			
-			fieldset {
-				border: none;
-				margin: auto;
-			}
-			
-			fieldset > div {
-				display: inline;
-			}
-			
-			fieldset > div > input {
-				margin-left: 10px;
-			}
-			
-			fieldset > div > label {
-				padding-left: 4px;
-			}
-			
-			
-			#form_contact > section > input[type='text'], #extrainfo, #reason {
-				width: 300px;
-				border: 1px solid black;
-			}
-			
-			#reason {
-				box-sizing: content-box; 
-			}
-			
-			#extrainfo {
-				resize: vertical;
-				vertical-align: top;
-			}
-			
-			#form-controls {
+			#contact-form .form-group:last-child {
 				text-align: center;
-				padding-top: 15px;
+				margin: 30px 0;
+			}
+			
+			#additional_info {
+				height: 140px;
+				resize: vertical;
+				max-width: 100%;
+			}
+						
+			@media (max-width: 768px) {
+				.btn-primary {
+					width: 100%;
+					padding: 20px 0;
+				}
 			}
 		</style>
 	</head>
-	<body style='margin: 0;'>
-		<header id='main-title'>McRonalds</header>
-		<nav id='main-nav'>
-			<a href='index.html'>Home</a>
-			<a href='menu.html'>Menu</a>
-			<a href='contact_us.html'>Contact Us</a>
-		</nav>
-		<main class='center'>
-			<form id='form_contact' method='POST'>
-				<section>
-					<label class='field_label' for='name'>Name:</label>
-					<input id='name' type='text' required>
-				</section>
-				<section>
-					<label class='field_label' for='email'>Email:</label>
-					<input id='email' type='text' required>
-				</section>
-				<section>
-					<label class='field_label' for='phone'>Phone:</label>
-					<input id='phone' type='text' required>
-				</section>
-				<section>
-					<label class='field_label' for='reason'>Reason for Inquiry:</label>
-					<select id='reason'>
-						<option>Catering</option>
-						<option>Private Party</option>
-						<option>Feedback</option>
-						<option>Other</option>
-					</select>
-				</section>
-				<section>
-					<label class='field_label' for='extrainfo'>Additional Information:</label>
-					<textarea id='extrainfo'></textarea>
-				</section>
-				
-				<fieldset>
-					<legend>Have you been to the restaurant?</legend>
-					<div>
-						<input type='radio' name='has_visited' id='visited_no' required><label for='visited_no'>No</label>
-						<input type='radio' name='has_visited' id='visited_yes' required><label for='visited_yes'>Yes</label>
+	<body>
+		<header>
+			<noscript>Please enable JavaScript for a better experience.</noscript>
+			<nav class='navbar navbar-inverse'>
+				<div class='container-fluid'>
+					<div class='navbar-header'>
+						<a class='navbar-brand' href='#'>McRonalds</a>
 					</div>
-				</fieldset>
-				
-				<fieldset>
-					<legend>Best days to contact you:</legend>
-					<div>
-						<input type='checkbox' id='contact_monday'><label for='contact_monday'>M</label>
-						<input type='checkbox' id='contact_tuesday'><label for='contact_tuesday'>T</label>
-						<input type='checkbox' id='contact_wednesday'><label for='contact_wednesday'>W</label>
-						<input type='checkbox' id='contact_thursday'><label for='contact_thursday'>Th</label>
-						<input type='checkbox' id='contact_friday'><label for='contact_friday'>F</label>
-					</div>
-				</fieldset>
-				
-				<section id='form-controls'>
-					<input type='submit' value='Send Request'>
-				</section>
+					<ul class='nav navbar-nav'>
+						<li><a href='index.html'><i id='home' class='fas fa-home'></i>Home</a></li>
+						<li><a href='menu.html'>Menu</a></li>
+						<li class='active'><a href='contact_us.html'>Contact Us</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<main>
+			<form id='contact-form' method='POST'>
+				<article id='main-info' class='form-horizontal'>
+					<section id='name-group' class='form-group'>
+						<label for='name' class='col-sm-4 control-label'>Name:</label>
+						<div class='col-sm-8'>
+							<input id='name' class='form-control' type='text' maxlength='40' required>
+							<div class='help-block'>Please tell us your name so that we know how to address you.</div>
+						</div>
+					</section>
+					<section id='email-group' class='form-group'>
+						<label for='email' class='col-sm-4 control-label'>Email:</label>
+						<div class='col-sm-8'>
+							<input id='email' class='form-control' type='text' placeholder='someone@somewhere.tld' required>
+							<small class='form-text text-muted'>We'll never share your email with anyone else.</small>
+							<div class='help-block'>Please check the email that you typed in.</div>
+						</div>
+					</section>
+					<section id='phone-group' class='form-group'>
+						<label for='phone' class='col-sm-4 control-label'>Phone:</label>
+						<div class='col-sm-8'>
+							<input id='phone' name='phone' class='form-control' type='tel' placeholder='1234567890' pattern='(\+?1)?\d{10}' maxlength='20'>
+							<small class='form-text text-muted'>We'll never share your contact details with anyone else.</small>
+							<div class='help-block'>Please check the phone number that you typed in.</div>
+						</div>
+					</section>
+					<section class='form-group'>
+						<label class='col-sm-4 control-label'>Reason for Inquiry:</label>
+						<div class='col-sm-8'>
+							<select id='reason' class='form-control'>
+								<option>Catering</option>
+								<option>Private Party</option>
+								<option>Feedback</option>
+								<option>Other</option>
+							</select>
+						</div>
+					</section>
+					<section class='form-group'>
+						<label class='col-sm-4 control-label'>Additional Information:</label>
+						<div class='col-sm-8'>
+							<textarea id='additional_info' name='additional_info' class='form-control' maxlength='1000' placeholder='Tell us anything! (optional)'></textarea>
+						</div>
+					</section>
+					<fieldset id='has-visited-group' class='form-group'>
+						<label class='col-sm-4 control-label'>Have you been to the restaraunt?</label>
+						<div class='col-sm-8'>
+							<label class='radio-inline'>
+								<input type='radio' name='has_visited' value='true' required>Yes
+							</label>
+							<label class='radio-inline'>
+								<input type='radio' name='has_visited' value='false'>No
+							</label>
+							<div class='help-block'>Please indicate whether you've visited our restaraunt in the past or not.</div>
+						</div>
+					</fieldset>
+					<fieldset id='contact-days-group' class='form-group'>
+						<label class='col-sm-4 control-label'>Best days to contact you:</label>
+						<div class='col-sm-8'>
+							<label class='checkbox-inline'>
+								<input type='checkbox' name='contact_days[]' value='Monday'>M
+							</label>
+							<label class='checkbox-inline'>
+								<input type='checkbox' name='contact_days[]' value='Tuesday'>T
+							</label>
+							<label class='checkbox-inline'>
+								<input type='checkbox' name='contact_days[]' value='Wednesday'>W
+							</label>
+							<label class='checkbox-inline'>
+								<input type='checkbox' name='contact_days[]' value='Thursday'>Th
+							</label>
+							<label class='checkbox-inline'>
+								<input type='checkbox' name='contact_days[]' value='Friday'>F
+							</label>
+							<div class='help-block'>We value your input. Please select at least one day that we can contact you.</div>
+						</div>
+					</fieldset>
+					<section class='form-group'>
+						<button type='submit' class='btn btn-primary'>Send Request</button>
+					</section>
+				</article>
 			</form>
 		</main>
 		<footer id='main-footer'>

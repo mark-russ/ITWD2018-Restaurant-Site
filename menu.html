@@ -1,80 +1,146 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 	<head>
-		<title></title>
-		<link rel="stylesheet" href='resources/main.css'>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
+		<!-- DO NOT FORGET THE NAME! -->
+		<title>Our Menu</title>
+		<!-- Bootstrap !-->
+		<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u' crossorigin='anonymous'>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js' integrity='sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa' crossorigin='anonymous'></script>
+		<!-- Site CSS !-->
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'> 
+		<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossorigin='anonymous'>
+		<link rel='stylesheet' href='resources/main.css'>
+		
 		<style>
-			main {
-				display: flex;
-				flex-wrap: wrap;
-				justify-content: space-evenly;
+			#food-menu {
+				margin: 0 auto;
+				max-width: 70%;
 			}
 			
-			main article {
+			#food-menu .item {
+				font-size: 15px;
 				text-align: center;
-				min-width: 200px;
-				width: 30%;
-				margin: 15px;
+				padding: 15px 30px;
+			}
+
+			#beverage-table {
+				border-spacing: 0;
+				border: 1px solid black;
+				margin: 0 auto;
+			}
+			
+			#beverage-table caption {
+				font-weight: bold;
+				font-size: 20px;
+				padding: 15px 0;
+				text-align: center;
+				color: black;
+			}
+			
+			#beverage-table td {
+				padding: 10px 30px;
+			}
+			
+			#beverage-table tr:nth-child(odd) {
+				background: #CCC;
 			}
 		</style>
 	</head>
-	<body style='margin: 0;'>
-		<header id='main-title'>McRonalds</header>
-		<nav id='main-nav'>
-			<a href='index.html'>Home</a>
-			<a href='menu.html'>Menu</a>
-			<a href='contact_us.html'>Contact Us</a>
-		</nav>
+	<body>
+		<header>
+			<noscript>Please enable JavaScript for a better experience.</noscript>
+			<nav class='navbar navbar-inverse'>
+				<div class='container-fluid'>
+					<div class='navbar-header'>
+						<a class="navbar-brand" href="#">McRonalds</a>
+					</div>
+					<ul class='nav navbar-nav'>
+						<li><a href='index.html'><i id='home' class='fas fa-home'></i>Home</a></li>
+						<li class='active'><a href='menu.html'>Menu</a></li>
+						<li><a href='contact_us.html'>Contact Us</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
 		<main>
-			<article>
-				<b>Classic Cheeseburger</b>
-				<div>
-					Simplicity at its finest.<br/>
-					Our Classic Cheeseburger comes seasoned with a pinch of salt and pepper, topped with a tangy pickle, a slice of American cheese, chopped onions, ketchup and a hint of mustard.<br/>
-					$1.19
+			<noscript>Please enable JavaScript for a better experience.</noscript>
+			<article id='food-menu'>
+				<div class='row'>
+					<section class='item col-lg-4'>
+						<b>Classic Cheeseburger</b>
+						<div>
+							Simplicity at its finest.<br/>
+							Our Classic Cheeseburger comes seasoned with a pinch of salt and pepper, topped with a tangy pickle, a slice of American cheese, chopped onions, ketchup and a hint of mustard.<br/>
+							$1.19
+						</div>
+					</section>
+					<section class='item col-lg-4'>
+						<b>Classic Hamburger</b>
+						<div>
+							It doesn't get much simpler. No, seriously..<br/>
+							Our Classic Hamburger comes seasoned with a pinch of salt and pepper, topped with a tangy pickle, chopped onions, ketchup and a hint of mustard. 
+							We don't expect you to order this, and if you do, we will ask you to leave.<br/>
+							$1.00
+						</div>
+					</section>
+					<section class='item col-lg-4'>
+						<b>Large Mac</b>
+						<div>
+							The king of all burgers.<br/>
+							Our Large Mac comes with a whopping two cheesy beef patties with an extra slice of bread in the middle. Topped with pickles, lettuce, onions and our famous Large Mac sauce.<br/>
+							$3.99
+						</div>
+					</section>
+				</div>
+				<div class='row'>
+					<section class='item col-lg-4'>
+						<b>113 Gram Burger</b>
+						<div>
+							This one's for all the meat lovers.<br/>
+							Our 113 Gram Burger comes with two slices of American cheese melted over a whole quarter pound of beef. It comes decorated with ketchup, mustard, slivered onions and tangy pickles.<br/>
+							$3.79
+						</div>
+					</section>
+					<section class='item col-lg-4'>
+						<b>Most Famous French Fries</b>
+						<div>
+							Burger's best friend<br/>
+							We use only the highest quality, premium grade Russet potatos. Our fries are the crispy golden standard that "competitors" can only wish to attain. With just 0 grams of trans fat per serving, what's not to love?<br/>
+							$1.69
+						</div>
+					</section>
+					<section class='item col-lg-4'>
+						<b>McSundaes</b>
+						<div>
+							Caramel or chocolate? You decide!<br/>
+							Our sundaes come sprinkled with chopped peanuts and dressed in either hot fudge or caramel using our very own blend of vanilla soft serve (made with 100% real dairy).<br/>
+							$1.29
+						</div>
+					</section>
 				</div>
 			</article>
-			<article>
-				<b>Classic Hamburger</b>
-				<div>
-					It doesn't get much simpler. No, seriously..<br/>
-					Our Classic Hamburger comes seasoned with a pinch of salt and pepper, topped with a tangy pickle, chopped onions, ketchup and a hint of mustard. 
-					We don't expect you to order this, and if you do, we will ask you to leave.<br/>
-					$1.00
-				</div>
-			</article>
-			<article>
-				<b>Large Mac</b>
-				<div>
-					The king of all burgers.<br/>
-					Our Large Mac comes with a whopping two cheesy beef patties with an extra slice of bread in the middle. Topped with pickles, lettuce, onions and our famous Large Mac sauce.<br/>
-					$3.99
-				</div>
-			</article>
-			<article>
-				<b>113 Gram Burger</b>
-				<div>
-					This one's for all the meat lovers.<br/>
-					Our 113 Gram Burger comes with two slices of American cheese melted over a whole quarter pound of beef. It comes decorated with ketchup, mustard, slivered onions and tangy pickles.<br/>
-					$3.79
-				</div>
-			</article>
-			<article>
-				<b>Most Famous French Fries</b>
-				<div>
-					Burger's best friend<br/>
-					We use only the highest quality, premium grade Russet potatos. Our fries are the crispy golden standard that "competitors" can only wish to attain. With just 0 grams of trans fat per serving, what's not to love?<br/>
-					$1.69
-				</div>
-			</article>
-			<article>
-				<b>McSundaes</b>
-				<div>
-					Caramel or chocolate? You decide!<br/>
-					Our sundaes come sprinkled with chopped peanuts and dressed in either hot fudge or caramel using our very own blend of vanilla soft serve (made with 100% real dairy).<br/>
-					$1.29
-				</div>
-			</article>
+			<table id='beverage-table'>
+				<caption>Beverages</caption>
+				<tr>
+					<td>Root Beer</td>
+					<td>$3.00</td>
+				</tr>
+				<tr>
+					<td>Bottled Water</td>
+					<td>$1.25</td>
+				</tr>
+				<tr>
+					<td>Lemonade</td>
+					<td>$1.00</td>
+				</tr>
+				<tr>
+					<td>Iced Tea</td>
+					<td>$1.25</td>
+				</tr>
+			</table>
 		</main>
 		<footer id='main-footer'>
 			 19820 Alberta St, Oneida, TN 37841<br>
