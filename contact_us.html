@@ -1,4 +1,4 @@
-
+﻿
 <html lang='en'>
 	<head>
         <meta charset='utf-8'>
@@ -14,10 +14,10 @@
 		<link rel='stylesheet' href='resources/main.css'>
 		
 		<script>
-			<!-- Stolen email validation regex that's based on HTML5's email validation spec -->
+			// Stolen email validation regex that's based on HTML5's email validation spec
 			var emailValidator = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,253}[a-zA-Z0-9])?)*$/;
-			var phoneValidator = /^1?\d{10}$/; <!-- We want to match domestic (123) 456-7890 and international formatted US numbers: +1 (123) 456-7890 -->
-			var phoneReplacer = /[ ()+-]/g; <!-- Strips away characters from a user-friendly phone number producing only a numeric string. -->
+			var phoneValidator = /^1?\d{10}$/; // We want to match domestic (123) 456-7890 and international formatted US numbers: +1 (123) 456-7890
+			var phoneReplacer = /[ ()+-]/g; // Strips away characters from a user-friendly phone number producing only a numeric string.
 			
 			var isFormValid = true;
 			
